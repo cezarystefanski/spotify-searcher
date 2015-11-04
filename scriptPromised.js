@@ -6,6 +6,11 @@
     "use strict";
     var spotifySearch = {};
 
+    /**
+     * A shorthand for making new promises
+     * @param url for querying the api
+     * @returns {Promise}
+     */
     spotifySearch.get = function(url) {
         return new Promise(function(resolve, reject) {
             var xmlhttp = new XMLHttpRequest();
@@ -27,6 +32,10 @@
         })
     };
 
+    /**
+     * Creates a request for the artist list based on the input
+     * @param ParentObject the spotifySearch object for accessing methods
+     */
     spotifySearch.doRequest = function(ParentObject) {
         var urlBase = "https://api.spotify.com/v1/search?q=";
         var urlType = "*&type=artist&limit=50";
@@ -52,6 +61,10 @@
 
     };
 
+    /**
+     * Prepares the list and iterates over the results and appends the newly made LIs to the list
+     * @param ArtistsObject converted from the JSON response
+     */
     spotifySearch.showResults = function (ArtistsObject) {
         var artistsArray = ArtistsObject.artists.items;
         var i;
@@ -66,6 +79,12 @@
         }
     };
 
+    /**
+     * Creates a list element with the artist image and the link to spotify
+     * and also sets up a click listener to each
+     * @param artistObject a single artist object
+     * @returns {Element} a ready li for appending to the list
+     */
     spotifySearch.createArtistListElement = function (artistObject) {
         var imageURL;
         var that = this;
@@ -100,6 +119,11 @@
         return artistLi;
     };
 
+    /**
+     * Creates a request for the album list based on the artist ID taken from the data-id attribute
+     * @param listenedImage clicked image of the artist
+     * @param parentObject the spotifySearch object for accessing methods
+     */
     spotifySearch.openAlbumList = function (listenedImage, parentObject) {
         var artistID = listenedImage.parentElement.getAttribute("data-id");
 
@@ -116,6 +140,10 @@
         });
     };
 
+    /**
+     * Opens up the album list modal and iterates over the results to append the list elements
+     * @param albumsObject converted from the JSON response
+     */
     spotifySearch.showAlbums = function (albumsObject) {
         var i;
         var albumsArray = albumsObject.items;
@@ -137,6 +165,12 @@
         this.scrollTop();
     };
 
+    /**
+     * Creates a list element with an image of the album and the link to spotify
+     * and also adds a click listener to each
+     * @param albumObject a single album object
+     * @returns {Element} a ready li for appending to the list
+     */
     spotifySearch.createAlbumListElement = function (albumObject) {
         var imageURL;
         var that = this;
@@ -171,6 +205,11 @@
         return artistLi;
     };
 
+    /**
+     * Creates a request for the track list based on the album ID taken from the data-id attribute
+     * @param listenedImage clicked image of the album
+     * @param parentObject the spotifySearch object for accessing methods
+     */
     spotifySearch.openTrackList = function (listenedImage, parentObject) {
         var albumID = listenedImage.parentElement.getAttribute("data-id");
 
@@ -187,6 +226,10 @@
         });
     };
 
+    /**
+     * Opens up the album list modal and iterates over the results to append the list elements
+     * @param tracksObject converted from the JSON response
+     */
     spotifySearch.showTracks = function (tracksObject) {
         var i;
         var tracksArray = tracksObject.items;
@@ -208,6 +251,11 @@
         this.scrollTop();
     };
 
+    /**
+     * Creates a list element with a link to spotify
+     * @param trackObject a single track object
+     * @returns {Element} a ready li element to append to the list
+     */
     spotifySearch.createTrackListElement = function (trackObject) {
         var name = trackObject.name;
         var spotifyLinkBase = "https://open.spotify.com/track/";
@@ -222,6 +270,9 @@
         return trackLi;
     };
 
+    /**
+     * Helper function for opening the album list modal
+     */
     spotifySearch.closeAlbumList = function () {
         var albumBox = document.querySelector("#albumBox");
         var albumBoxMask = document.querySelector("#albumBoxMask");
@@ -230,6 +281,9 @@
         albumBoxMask.classList.add("hidden");
     };
 
+    /**
+     * Helper function for opening the track list modal
+     */
     spotifySearch.closeTrackList = function () {
         var trackBox = document.querySelector("#trackBox");
         var trackBoxMask = document.querySelector("#trackBoxMask");
@@ -238,10 +292,16 @@
         trackBoxMask.classList.add("hidden");
     };
 
+    /**
+     * Helper function for jumping to the very top of the app
+     */
     spotifySearch.scrollTop = function () {
         window.scrollTo(0, 0);
     };
 
+    /**
+     * Helper function for setting up the main listeners on the app
+     */
     spotifySearch.setupListeners = function () {
         var that = this;
 

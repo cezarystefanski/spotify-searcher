@@ -153,6 +153,25 @@ a:active {
     height: 100%;
 }
 
+#backToTop {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    width: 3rem;
+    height: 3rem;
+    z-index: 15;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    color: #000000;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    line-height: 4em;
+    cursor: pointer;
+    background: #ffffff;
+}
+
 @media screen and (max-width: 640px) {
     #albumBox {
         left: 0.5em;
@@ -168,5 +187,10 @@ a:active {
 
     #resultList li, #albumList li {
         max-width: 90%;
+    }
+
+    #backToTop {
+        bottom: 1rem;
+        right: 1rem;
     }
 }

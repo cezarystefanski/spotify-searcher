@@ -162,7 +162,7 @@
             var albumLi = this.createAlbumListElement(oneAlbum);
             albumList.appendChild(albumLi);
         }
-        this.scrollTop();
+        this.scrollToTop();
     };
 
     /**
@@ -248,7 +248,7 @@
             var trackLi = this.createTrackListElement(oneTrack);
             trackList.appendChild(trackLi);
         }
-        this.scrollTop();
+        this.scrollToTop();
     };
 
     /**
@@ -295,8 +295,22 @@
     /**
      * Helper function for jumping to the very top of the app
      */
-    spotifySearch.scrollTop = function () {
+    spotifySearch.scrollToTop = function () {
         window.scrollTo(0, 0);
+    };
+
+    /**
+     * Shows and hides the floating back to top button depending on the distance from the top of the app
+     */
+    spotifySearch.showScrollToTopButton = function() {
+        var scrolledAmount = 300;
+        var backToTop = document.querySelector("#backToTop");
+
+        if (window.scrollY > scrolledAmount) {
+            backToTop.classList.remove("hidden");
+        } else {
+            backToTop.classList.add("hidden");
+        }
     };
 
     /**
@@ -309,6 +323,7 @@
         var closeAlbumListButton = document.querySelector("#closeAlbumList");
         var closeTrackListButton = document.querySelector("#closeTrackList");
         var searchBox = document.querySelector("#searchBox");
+        var backToTop = document.querySelector("#backToTop");
 
         searchButton.addEventListener("click", function() {
             that.doRequest(that);
@@ -318,6 +333,9 @@
         searchBox.addEventListener("keyup", function() {
             that.doRequest(that);
         });
+        backToTop.addEventListener("click", this.scrollToTop);
+        window.addEventListener("scroll", this.showScrollToTopButton);
+        searchBox.focus();
     };
 
     spotifySearch.setupListeners();

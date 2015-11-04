@@ -63,10 +63,10 @@
 
     /**
      * Prepares the list and iterates over the results and appends the newly made LIs to the list
-     * @param ArtistsObject converted from the JSON response
+     * @param artistsObject converted from the JSON response
      */
-    spotifySearch.showResults = function (ArtistsObject) {
-        var artistsArray = ArtistsObject.artists.items;
+    spotifySearch.showResults = function (artistsObject) {
+        var artistsArray = artistsObject.artists.items;
         var i;
         var artistsLength = artistsArray.length;
         var resultList = document.querySelector("#resultList");

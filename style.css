@@ -61,7 +61,7 @@ ul {
     text-align: center;
 }
 
-#resultList li, #albumList li {
+ul#resultList li, ul#albumList li {
     margin-bottom: 1em;
     padding-top: 1em;
     border-top: 1px solid black;
@@ -71,12 +71,12 @@ ul {
     margin-right: auto;
 }
 
-#resultList li:nth-child(even), #albumList li:nth-child(even) {
+ul#resultList li:nth-child(even), ul#albumList li:nth-child(even) {
     border-right: 1px solid black;
     border-left: none;
 }
 
-#resultList li a::before, #albumList li a::before {
+ul#resultList li a::before, ul#albumList li a::before {
     content: "Spotify link: ";
     font-weight: bold;
 }
@@ -185,7 +185,7 @@ a:active {
         right: 1em;
     }
 
-    #resultList li, #albumList li {
+    ul#resultList li, ul#albumList li {
         max-width: 90%;
     }
 
